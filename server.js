@@ -12,7 +12,7 @@ const port = dev.app.port;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ entended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/posts", postRoute);
 

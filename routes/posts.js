@@ -1,18 +1,9 @@
 const express = require("express");
 
 const route = express.Router();
+const { getAllPosts, createPost } = require("../controllers/posts");
 
-route.get("/", (req, res, next) => {
-  res.json({ message: "gell all posts" });
-});
-
-route.get("/:id", (req, res, next) => {
-  let id = req.params.id;
-  res.json({ message: "gell  posts of id" + id });
-});
-
-route.post("/", (req, res, next) => {
-  res.json({ post: req.body });
-});
+route.get("/", getAllPosts);
+route.post("/", createPost);
 
 module.exports = route;

@@ -3,7 +3,19 @@ const Post = require("../models/post");
 const getAllPosts = async (req, res, next) => {
   try {
     const allPosts = await Post.find();
-    return res.status(201).json(allPosts);
+    return res
+      .status(201)
+      .json(allPosts.map((item) => item.toObject({ getters: true })));
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const getOnePost = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const post = await Post.findById(id);
+    return res.status(201).json(post.toObject({ getters: true }));
   } catch (err) {
     return next(err);
   }
@@ -11,9 +23,9 @@ const getAllPosts = async (req, res, next) => {
 
 const createPost = async (req, res, next) => {
   try {
-    const { id, title, content, date } = req.body;
+    const { title, content, author, date } = req.body;
     const newPost = new Post({
-      id,
+      author,
       title,
       content,
       date,
@@ -50,3 +62,4 @@ exports.getAllPosts = getAllPosts;
 exports.createPost = createPost;
 exports.deletePost = deletePost;
 exports.updatePost = updatePost;
+exports.getOnePost = getOnePost;

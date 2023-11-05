@@ -2,14 +2,13 @@ const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema(
   {
-    id: {
-      type: String,
-      required: [true, "Name is required"],
-      unique: true,
-    },
     title: {
       type: String,
       required: [true, "Title is required"],
+    },
+    author: {
+      type: String,
+      required: [true, "Author is required"],
     },
     content: {
       type: String,
